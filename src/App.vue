@@ -1,11 +1,5 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/money">money</router-link>
-      <router-link to="/label">label</router-link>
-      <router-link to="/statistics">statistics</router-link>
-      <router-link to="/404">other</router-link>
-    </div>
     <router-view/>
   </div>
 </template>
@@ -15,6 +9,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+  }
+  a{
+    text-decoration: none;
+    color: inherit;
   }
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;

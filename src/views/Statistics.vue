@@ -1,7 +1,9 @@
 <template>
-  <div>
-    Statistics
-  </div>
+  <Layout>
+    <div class="statistics">
+      statistics
+    </div>
+  </Layout>
 </template>
 
 <script lang="ts">

@@ -1,7 +1,9 @@
 <template>
-  <div>
-    Money.vue
-  </div>
+  <Layout>
+    <div class="money">
+      money
+    </div>
+  </Layout>
 </template>
 
 <script lang="ts">
@@ -12,5 +14,4 @@
 
 
 <style scoped lang="scss">
-
 </style>
