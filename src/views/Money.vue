@@ -14,8 +14,4 @@
 
 
 <style scoped lang="scss">
-  @import "~@/assets/style/helper.scss";
-  .money{
-    color: $red;
-  }
 </style>
