@@ -12,6 +12,8 @@
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    color: #333;
+    font-size: 14px;
   }
 
   a {

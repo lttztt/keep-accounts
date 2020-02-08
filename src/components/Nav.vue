@@ -26,6 +26,7 @@
   @import "~@/assets/style/helper.scss";
   nav{
     display: flex;
+    @extend %outShadow;
     .item {
       display: flex;
       flex-direction: column;
@@ -43,7 +44,7 @@
         font-size: 14px;
       }
       &.selected{
-        color: $color-red;
+        color: $color-highlight;
       }
     }
   }
