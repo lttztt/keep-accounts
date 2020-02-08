@@ -1,15 +1,30 @@
 <template>
   <div class="types">
     <ul>
-      <li class="selected">支出</li>
-      <li>收入</li>
+<!--   动态绑定类的两种写法   -->
+      <li
+        :class="type === '-' && 'selected'"
+        @click="selectType('-')">支出</li>
+      <li
+        :class="{selected: type === '+'}"
+        @click="selectType('+')">收入</li>
     </ul>
   </div>
 </template>
 
-<script lang="ts">
+<script lang="js">
   export default {
-    name: "Types"
+    name: "Types",
+    data() {
+      return {
+        type: '-' // '-'表示支出 '+'表示收入
+      }
+    },
+    methods: {
+      selectType(type) {
+        this.type = type;
+      }
+    }
   };
 </script>
 
