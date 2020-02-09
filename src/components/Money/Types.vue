@@ -1,31 +1,52 @@
 <template>
   <div class="types">
     <ul>
-<!--   动态绑定类的两种写法   -->
+      <!--   动态绑定类的两种写法   -->
       <li
         :class="type === '-' && 'selected'"
-        @click="selectType('-')">支出</li>
+        @click="selectType('-')">支出
+      </li>
       <li
         :class="{selected: type === '+'}"
-        @click="selectType('+')">收入</li>
+        @click="selectType('+')">收入
+      </li>
     </ul>
   </div>
 </template>
 
-<script lang="js">
-  export default {
-    name: "Types",
-    data() {
-      return {
-        type: '-' // '-'表示支出 '+'表示收入
+<script lang="ts">
+  import Vue from 'vue';
+  import {Component, Prop} from 'vue-property-decorator';
+
+  @Component
+  export default class Types extends Vue {
+    @Prop(Number) xxx: number | undefined;
+    // @Prop 告诉 Vue xxx不是data而是prop
+    // (Number) 告诉 Vue xxx运行时是个 Number
+    // xxx 属性名
+    // number | undefined: 告诉 TS xxx 在编译时的类型
+
+    type = '-';  // '-'表示支出 '+'表示收入
+    selectType(type: string) {
+      if (type !== '-' && type !== '+') {
+        throw new Error('type is unknown');
       }
-    },
-    methods: {
-      selectType(type) {
-        this.type = type;
-      }
+      this.type = type;
     }
-  };
+  }
+  // export default {
+  //   name: "Types",
+  //   data() {
+  //     return {
+  //       type: '-' // '-'表示支出 '+'表示收入
+  //     }
+  //   },
+  //   methods: {
+  //     selectType(type) {
+  //       this.type = type;
+  //     }
+  //   }
+  // };
 </script>
 
 
