@@ -15,13 +15,14 @@
   import Notes from '@/components/Money/Notes.vue';
   import Types from '@/components/Money/Types.vue';
   import NumberPad from '@/components/Money/NumberPad.vue';
-  import {Component} from 'vue-property-decorator';
+  import {Component, Watch} from 'vue-property-decorator';
 
   type Record = {
     tags: string[]
     notes: string
     type: string
     amount: number
+    createAt?: Date // 除了数据类型 还可以是 类 (构造函数)
   }
 
   @Component({
@@ -29,20 +30,32 @@
   })
   export default class Money extends Vue {
     tags = ['衣', '食', '住', '行'];
+    recordList: Record[] = JSON.parse(window.localStorage.getItem('recordList') || '[]');
     record: Record = {
       tags: [], notes: '', type: '-', amount: 0
-    }
-    onUpdateTags(value: string[]){
+    };
+
+    onUpdateTags(value: string[]) {
       console.log('onUpdateTags', value);
       this.record.tags = value;
-  }
-    onUpdateNotes(value: string){
-      this.record.notes = value
     }
-    saveRecord(value: string){
-      console.log('this.record:', this.record);
+
+    onUpdateNotes(value: string) {
+      this.record.notes = value;
     }
-    
+
+    saveRecord() {
+      let record2: Record = JSON.parse(JSON.stringify(this.record));
+      record2.createAt = new Date();
+      this.recordList.push(record2);
+      console.log('this.record:', this.recordList);
+    }
+    @Watch('recordList')
+    onRecordListChange(){
+      let recordList = JSON.stringify(this.recordList);
+      window.localStorage.setItem('recordList', recordList);
+    }
+
   }
 </script>
 
