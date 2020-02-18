@@ -3,11 +3,11 @@
     <ul>
       <!--   动态绑定类的两种写法   -->
       <li
-        :class="type === '-' && 'selected'"
+        :class="value === '-' && 'selected'"
         @click="selectType('-')">支出
       </li>
       <li
-        :class="{selected: type === '+'}"
+        :class="{selected: value === '+'}"
         @click="selectType('+')">收入
       </li>
     </ul>
@@ -20,18 +20,19 @@
 
   @Component
   export default class Types extends Vue {
-    @Prop(Number) xxx: number | undefined;
+    @Prop() readonly value!: string;
+    // @Prop() xxx: number | undefined;
     // @Prop 告诉 Vue xxx不是data而是prop
     // (Number) 告诉 Vue xxx运行时是个 Number
     // xxx 属性名
     // number | undefined: 告诉 TS xxx 在编译时的类型
 
-    type = '-';  // '-'表示支出 '+'表示收入
+    // type = '-';  // '-'表示支出 '+'表示收入
     selectType(type: string) {
       if (type !== '-' && type !== '+') {
         throw new Error('type is unknown');
       }
-      this.type = type;
+      this.$emit('update:value', type)
     }
   }
   // export default {

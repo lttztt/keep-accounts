@@ -28,6 +28,7 @@
       } else {
         this.selectedTags.push(tag);
       }
+      this.$emit('update:value', this.selectedTags)
     }
     newTag(){
       let value = window.prompt('请输入标签名?')!;
