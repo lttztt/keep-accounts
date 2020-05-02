@@ -34,13 +34,13 @@
       amount: 0
     };
     saveRecord(){
-      let record2:RecordItem = JSON.parse(JSON.stringify(this.record))
+      let record2 = model.deepClone(this.record);
       record2.createAt = new Date()
       this.recordList.push(record2)
     }
     @Watch('recordList')
-    onRecordListChange(value: RecordItem){
-      window.localStorage.setItem('recordList', JSON.stringify(value))
+    onRecordListChange(value: RecordItem[]){
+      model.save(value)
     }
   }
 </script>

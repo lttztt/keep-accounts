@@ -1,6 +1,9 @@
 export const localStorageName = 'recordList';
 
 const model = {
+  deepClone(value: RecordItem){
+    return JSON.parse(JSON.stringify(value))
+  },
   fetch(){
     return JSON.parse(window.localStorage.getItem(localStorageName) || '[]') as RecordItem[]; // 强制指定 返回类型
   },
