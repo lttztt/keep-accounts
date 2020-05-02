@@ -17,7 +17,7 @@
   import Types from '@/components/Money/Types.vue';
   import NumberPad from '@/components/Money/NumberPad.vue';
   import {Component, Watch} from "vue-property-decorator";
-  import model from "@/model";
+  import model from "@/models/model";
 
   const recordList = model.fetch();
 
