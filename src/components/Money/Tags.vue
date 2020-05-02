@@ -19,7 +19,8 @@
   @Component
   export default class Tags extends Vue {
     @Prop(Array) readonly dataSource: string[] | undefined;
-    selectedTags: string[] = [];
+    @Prop(Array) readonly value!: string[];
+    selectedTags: string[] = this.value;
 
     toggle(tag: string) {
       const index = this.selectedTags.indexOf(tag);
@@ -28,10 +29,11 @@
       } else {
         this.selectedTags.push(tag);
       }
+      this.$emit('update:value', this.selectedTags)
     }
     newTag(){
       let value = window.prompt('请输入标签名?')!;
-      if(value.trim() === ''){
+      if(value && value.trim() === ''){
         window.alert('标签名不能为空')
       }else if(this.dataSource){
         this.$emit('update:dataSource', [...this.dataSource, value])

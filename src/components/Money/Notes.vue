@@ -2,18 +2,21 @@
   <div class="notes">
     <label>
       <span class="name">备注</span>
-      <input type="text" v-model="value" placeholder="在这里添加备注">
+      <input type="text" :value="value" @input="onValueChange" placeholder="在这里添加备注">
     </label>
   </div>
 </template>
 
 <script lang="ts">
   import Vue from 'vue';
-  import {Component} from 'vue-property-decorator';
-
+  import {Component, Prop, Watch} from 'vue-property-decorator';
   @Component
   export default class Notes extends Vue {
-    value = '';
+    @Prop() readonly value!:string;
+
+    onValueChange(e: HTMLInputElement){
+      this.$emit('update:value', e.target.value)
+    }
   }
 </script>
 
