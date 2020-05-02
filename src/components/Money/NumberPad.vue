@@ -67,6 +67,8 @@
 
     ok() {
       this.$emit('update:value', Number(this.output))
+      this.$emit('submit', Number(this.output))
+      this.output = '0'
     }
   }
 </script>
