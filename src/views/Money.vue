@@ -1,6 +1,7 @@
 <template>
   <Layout class-prefix="money">
     <div class="money">
+      {{recordList}}
       <Tags :data-source.sync="tags" :value.sync="record.tags" />
       <Notes :value.sync="record.notes" />
       <Types :value.sync="record.type" />
@@ -16,6 +17,9 @@
   import Types from '@/components/Money/Types.vue';
   import NumberPad from '@/components/Money/NumberPad.vue';
   import {Component, Watch} from "vue-property-decorator";
+  let {model} = require('@/model.js');
+
+  console.log(model);
 
   type Record = {
     tags: string[],
@@ -31,7 +35,7 @@
   })
   export default class Money extends Vue {
     tags = ['衣', '食', '住', '行'];
-    recordList: Record[] = [];
+    recordList: Record[] = model.fetch();
     record: Record = {
       tags: [],
       notes: '',
