@@ -1,6 +1,6 @@
 export const localStorageName = 'recordList';
 
-const model = {
+const recordListModel = {
   deepClone(value: RecordItem){
     return JSON.parse(JSON.stringify(value))
   },
@@ -13,5 +13,5 @@ const model = {
   }
 }
 
-export default model
+export default recordListModel
 

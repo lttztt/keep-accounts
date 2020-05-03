@@ -1,27 +1,16 @@
 <template>
   <Layout>
-    <div class="label">
+    <div class="tag">
       <ol>
-        <li>
-          <span>衣</span>
-          <Icon name="right" />
-        </li>
-        <li>
-          <span>食</span>
-          <Icon name="right" />
-        </li>
-        <li>
-          <span>住</span>
-          <Icon name="right" />
-        </li>
-        <li>
-          <span>行</span>
-          <Icon name="right" />
+        <li v-for="tag in tags"
+            :key="tag">
+          <span>{{tag}}</span>
+          <Icon name="right"/>
         </li>
       </ol>
 
-      <div class="createLabel-wrapper">
-        <button class="createLabel">新建标签</button>
+      <div class="createTag-wrapper">
+        <button class="createTag" @click="createTag">新建标签</button>
       </div>
     </div>
   </Layout>
@@ -29,28 +18,42 @@
 
 <script lang="ts">
 
-  import Vue from 'vue'
-  import {Component} from "vue-property-decorator";
+  import Vue from 'vue';
+  import {Component} from 'vue-property-decorator';
+  import tagListModel from '@/models/tagListModel';
 
   @Component
   export default class Label extends Vue {
-
+    tags = tagListModel.fetch();
+    createTag(){
+      let tag = window.prompt('请输入标签名');
+      if(tag) {
+        let message = tagListModel.create(tag)
+        if(message === 'duplicated'){
+          window.alert('标签名重复')
+        }else if(message === 'success') {
+          window.alert('创建成功')
+        }
+      }
+    }
   }
 </script>
 
 
 <style scoped lang="scss">
-  .label ol{
+  .tag ol {
     background: #fff;
-    > li{
+
+    > li {
       font-size: 18px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       min-height: 40px;
-      border-bottom: 1px solid #7d7d7d;
+      border-bottom: 1px solid #e6e6e6;
       margin-left: 16px;
       padding-right: 16px;
+
       .icon {
         width: 18px;
         height: 18px;
@@ -58,11 +61,13 @@
       }
     }
   }
-  .createLabel-wrapper {
+
+  .createTag-wrapper {
     text-align: center;
     padding-top: 16px;
     margin-top: 44-16px;
-    .createLabel {
+
+    .createTag {
       background: #767676;
       color: #fff;
       line-height: 40px;
