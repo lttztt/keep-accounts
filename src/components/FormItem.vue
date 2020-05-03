@@ -1,8 +1,8 @@
 <template>
-  <div class="notes">
+  <div class="form-item">
     <label>
-      <span class="name">备注</span>
-      <input type="text" :value="value" @input="onValueChange" placeholder="在这里添加备注">
+      <span class="form-label">{{label}}</span>
+      <input type="text" :value="value" @input="onValueChange" :placeholder="placeholder">
     </label>
   </div>
 </template>
@@ -10,27 +10,29 @@
 <script lang="ts">
   import Vue from 'vue';
   import {Component, Prop, Watch} from 'vue-property-decorator';
-  @Component
-  export default class Notes extends Vue {
-    @Prop() readonly value!:string;
 
-    onValueChange(e: KeyboardEvent){
+  @Component
+  export default class FormItem extends Vue {
+    @Prop() readonly value!: string;
+    @Prop({required: true}) label!: string;
+    @Prop({default: '请输入'}) placeholder!: string;
+
+    onValueChange(e: KeyboardEvent) {
       let input = e.target as HTMLInputElement;
-      this.$emit('update:value', input.value)
+      this.$emit('update:value', input.value);
     }
   }
 </script>
 
 
 <style scoped lang="scss">
-  .notes {
-    background: #E5E5E5;
+  .form-item {
 
     > label {
       display: flex;
       align-items: center;
 
-      .name {
+      .form-label {
         margin: 0 12px;
       }
 

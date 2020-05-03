@@ -4,14 +4,22 @@
       <Icon name="left" />
       <span>编辑标签</span>
     </div>
+    <div>
+      <FormItem
+        label="标签名"
+        placeholder="请输入标签名"
+      />
+    </div>
   </layout>
 </template>
 
 <script lang="ts">
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
-
-  @Component
+  import FormItem from '@/components/FormItem.vue';
+  @Component({
+    components: {FormItem}
+  })
   export default class LabelEdit extends Vue {
     created(){
       console.log(this.$route.params);
