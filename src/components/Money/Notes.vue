@@ -14,8 +14,9 @@
   export default class Notes extends Vue {
     @Prop() readonly value!:string;
 
-    onValueChange(e){
-      this.$emit('update:value', e.target.value)
+    onValueChange(e: KeyboardEvent){
+      let input = e.target as HTMLInputElement;
+      this.$emit('update:value', input.value)
     }
   }
 </script>
