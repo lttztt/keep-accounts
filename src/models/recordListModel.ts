@@ -1,15 +1,20 @@
+import clone from '@/lib/clone';
 export const localStorageName = 'recordList';
 
 const recordListModel = {
-  deepClone(value: RecordItem){
-    return JSON.parse(JSON.stringify(value))
-  },
+  data: [] as RecordItem[],
   fetch(){
-    return JSON.parse(window.localStorage.getItem(localStorageName) || '[]') as RecordItem[]; // 强制指定 返回类型
+    this.data =  JSON.parse(window.localStorage.getItem(localStorageName) || '[]') as RecordItem[]; // 强制指定 返回类型
+    return this.data;
   },
-
-  save(value: RecordItem[]){
-    window.localStorage.setItem(localStorageName, JSON.stringify(value))
+  create(record: RecordItem){
+    let record2: RecordItem = clone(record);
+    record2.createAt = new Date()
+    this.data.push(record2);
+    this.save();
+  },
+  save(){
+    window.localStorage.setItem(localStorageName, JSON.stringify(this.data))
   }
 }
 

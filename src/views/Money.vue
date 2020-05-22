@@ -38,13 +38,11 @@
       amount: 0
     };
     saveRecord(){
-      let record2 = recordListModel.deepClone(this.record);
-      record2.createAt = new Date()
-      this.recordList.push(record2)
+      recordListModel.create(this.record)
     }
     @Watch('recordList')
-    onRecordListChange(value: RecordItem[]){
-      recordListModel.save(value)
+    onRecordListChange(){
+      recordListModel.save();
     }
   }
 </script>
