@@ -1,7 +1,6 @@
 <template>
   <Layout class-prefix="money">
     <div class="money">
-      {{recordList}}
       <Tags :data-source.sync="tags" :value.sync="record.tags" />
       <FormItem
         label="备注"

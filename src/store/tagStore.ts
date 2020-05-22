@@ -17,7 +17,7 @@ const tagStore = {
   removeTag(id: string) {
     const ids = this.tagList.map(item => item.id);
     if (ids.indexOf(id) >= 0) {
-      this.tagList = this.tagList.filter(item => item.id === id);
+      this.tagList = this.tagList.filter(item => item.id !== id);
       this.saveTags();
       return true;
     } else {
