@@ -23,43 +23,29 @@
   import {Component} from 'vue-property-decorator';
   import FormItem from '@/components/FormItem.vue';
   import Button from '@/components/Button.vue';
-  import tagListModel from '@/models/tagListModel';
 
-  type Tag = {
-    id: string
-    name: string
-  }
 
   @Component({
     components: {Button, FormItem}
   })
   export default class LabelEdit extends Vue {
-    tag?: Tag = {
-      id: '',
-      name: ''
-    }
+    tag?: Tag = undefined
     created(){
       console.log(this.$route.params);
-      let tagId = this.$route.params.id;
-      if(tagId){
-        const ids = tagListModel.data.map(item => item.id);
-        const index = ids.indexOf(tagId)
-        console.log(index);
-        if(index >= 0){
-          this.tag = tagListModel.data[index]
-          console.log(this.tag);
-        }
+      this.tag =  window.findTag(this.$route.params.id);
+      if(!this.tag){
+        this.$router.replace('/404')
       }
     }
 
     update(name: string){
       if(this.tag) {
-        tagListModel.update(this.tag.id, name)
+        window.updateTag(this.tag.id, name);
       }
     }
     remove(){
       if(this.tag){
-        if(tagListModel.remove(this.tag.id)){
+        if(window.removeTag(this.tag.id)){
           this.$router.back()
         }else {
           window.alert('删除失败')
