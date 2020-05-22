@@ -31,7 +31,7 @@
     }
   })
   export default class Label extends Vue {
-    tags = tagListModel.fetch();
+    tags = window.tagList;
     createTag(){
       let tag = window.prompt('请输入标签名');
       if(tag) {
