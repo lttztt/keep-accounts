@@ -15,7 +15,7 @@
 <script lang="ts">
   import Vue from 'vue';
   import {Component, Prop} from 'vue-property-decorator';
-  import tagListModel from '@/models/tagListModel';
+  import store from '@/store/index2';
 
   @Component
   export default class Tags extends Vue {
@@ -37,8 +37,8 @@
       if(value && value.trim() === ''){
         window.alert('标签名不能为空')
       }else if(this.dataSource){
-        tagListModel.create(value)
-        this.$emit('update:dataSource', tagListModel.fetch())
+        store.createTag(value)
+        this.$emit('update:dataSource', store.fetchTags())
       }
     }
   }

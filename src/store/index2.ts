@@ -6,4 +6,5 @@ const store = {
   ...recordStore
 };
 
+console.log('store', store);
 export default store;
