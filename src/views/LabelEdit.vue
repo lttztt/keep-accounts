@@ -1,12 +1,12 @@
 <template>
   <layout>
     <div class="header">
-      <Icon name="left" @click="goBack" />
+      <Icon name="left" @click="goBack"/>
       <span>编辑标签</span>
     </div>
     <div>
       <FormItem
-        :value="tag.name"
+        :value="currentTag.name"
         @update:value="update"
         label="标签名"
         placeholder="请输入标签名"
@@ -23,38 +23,38 @@
   import {Component} from 'vue-property-decorator';
   import FormItem from '@/components/FormItem.vue';
   import Button from '@/components/Button.vue';
-  import store from '@/store/index2';
-
 
   @Component({
     components: {Button, FormItem}
   })
   export default class LabelEdit extends Vue {
-    tag?: Tag = undefined
-    created(){
+    get currentTag() {
+      return this.$store.state.currentTag;
+    }
+
+    created() {
       console.log(this.$route.params);
-      this.tag =  store.findTag(this.$route.params.id);
-      if(!this.tag){
-        this.$router.replace('/404')
+      this.$store.commit('findTag', this.$route.params.id);
+      if (!this.currentTag) {
+        this.$router.replace('/404');
       }
     }
 
-    update(name: string){
-      if(this.tag) {
-        store.updateTag(this.tag.id, name);
-      }
-    }
-    remove(){
-      if(this.tag){
-        if(store.removeTag(this.tag.id)){
-          this.$router.back()
-        }else {
-          window.alert('删除失败')
-        }
+    update(name: string) {
+      if (this.currentTag) {
+        this.$store.commit('updateTag', {
+          id: this.currentTag.id, name
+        });
       }
     }
 
-    goBack(){
+    remove() {
+      if (this.currentTag) {
+        this.$store.commit('removeTag', this.currentTag.id)
+      }
+    }
+
+    goBack() {
       console.log('back');
       this.$router.back();
     }
@@ -69,6 +69,7 @@
     justify-content: center;
     align-items: center;
     padding: 8px;
+
     .icon {
       position: absolute;
       width: 20px;
@@ -76,7 +77,8 @@
       left: 16px;
     }
   }
-  .remove{
+
+  .remove {
     margin-top: 16px;
     text-align: center;
   }
