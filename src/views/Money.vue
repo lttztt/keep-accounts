@@ -1,7 +1,7 @@
 <template>
   <Layout class-prefix="money">
     <div class="money">
-      <Tags :data-source.sync="tags" :value.sync="record.tags" />
+      <Tags :value.sync="record.tags" />
       <FormItem
         label="备注"
         placeholder="请输入备注"

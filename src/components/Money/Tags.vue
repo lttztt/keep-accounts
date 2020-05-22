@@ -1,7 +1,7 @@
 <template>
   <div class="tags">
     <ul class="current">
-      <li v-for="tag in dataSource" :key="tag.id"
+      <li v-for="tag in tagList" :key="tag.id"
           :class="{selected: selectedTags.indexOf(tag) >= 0}"
           @click="toggle(tag)">{{tag.name}}
       </li>
@@ -19,8 +19,8 @@
 
   @Component
   export default class Tags extends Vue {
-    @Prop(Array) readonly dataSource: string[] | undefined;
     @Prop(Array) readonly value!: string[];
+    tagList = store.fetchTags();
     selectedTags: string[] = this.value;
 
     toggle(tag: string) {
@@ -30,16 +30,15 @@
       } else {
         this.selectedTags.push(tag);
       }
-      this.$emit('update:value', this.selectedTags)
+      this.$emit('update:value', this.selectedTags);
     }
-    newTag(){
-      let value = window.prompt('请输入标签名?')!;
-      if(value && value.trim() === ''){
-        window.alert('标签名不能为空')
-      }else if(this.dataSource){
-        store.createTag(value)
-        this.$emit('update:dataSource', store.fetchTags())
+
+    newTag() {
+      let name = window.prompt('请输入标签名?')!;
+      if (name && name.trim() === '') {
+        return window.alert('标签名不能为空');
       }
+      store.createTag(name);
     }
   }
 </script>
@@ -69,7 +68,8 @@
         border-radius: $h/2;
         margin-right: 12px;
         margin-top: 4px;
-        &.selected{
+
+        &.selected {
           background: darken($bg, 40%);
           color: #eee;
         }
