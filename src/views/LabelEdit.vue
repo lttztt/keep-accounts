@@ -34,6 +34,7 @@
 
     created() {
       console.log(this.$route.params);
+      this.$store.commit('fetchTags');
       this.$store.commit('findTag', this.$route.params.id);
       if (!this.currentTag) {
         this.$router.replace('/404');
