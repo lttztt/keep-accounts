@@ -15,12 +15,19 @@
 <script lang="ts">
   import Vue from 'vue';
   import {Component, Prop} from 'vue-property-decorator';
-  import store from '@/store/index2';
 
   @Component
   export default class Tags extends Vue {
     @Prop(Array) readonly value!: string[];
-    tagList = store.fetchTags();
+
+    created(){
+      this.$store.commit('fetchTags')
+    }
+
+    get tagList (){
+      return this.$store.state.tagList;
+    }
+
     selectedTags: string[] = this.value;
 
     toggle(tag: string) {
@@ -38,7 +45,7 @@
       if (name && name.trim() === '') {
         return window.alert('标签名不能为空');
       }
-      store.createTag(name);
+      this.$store.commit('createTag', name)
     }
   }
 </script>
