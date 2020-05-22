@@ -1,7 +1,7 @@
 <template>
   <layout>
     <div class="header">
-      <Icon name="left" />
+      <Icon name="left" @click="goBack" />
       <span>编辑标签</span>
     </div>
     <div>
@@ -13,7 +13,7 @@
       />
     </div>
     <div class="remove">
-      <Button>删除标签</Button>
+      <Button @click="remove">删除标签</Button>
     </div>
   </layout>
 </template>
@@ -53,7 +53,19 @@
     }
 
     update(name: string){
+      if(this.tag) {
+        tagListModel.update(this.tag.id, name)
+      }
+    }
+    remove(){
+      if(this.tag){
+        tagListModel.remove(this.tag.id)
+      }
+    }
 
+    goBack(){
+      console.log('back');
+      this.$router.back();
     }
   }
 </script>
