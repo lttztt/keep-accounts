@@ -51,6 +51,7 @@
   import {Component} from 'vue-property-decorator';
   import recordTypeList from '@/constants/recordTypeList';
   import intervalList from '@/constants/intervalList';
+  import dayjs from 'dayjs'
 
   @Component({
     components: {Tabs}
