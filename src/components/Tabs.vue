@@ -4,6 +4,7 @@
       v-for="item in dataSource"
       :key="item.value"
       :class="liClass(item)"
+      class="tabs-item"
       @click="selectTab(item)">{{item.text}}
     </li>
   </ul>
@@ -35,7 +36,7 @@
 </script>
 
 
-<style scoped lang="scss">
+<style  lang="scss">
   .tabs {
     color: #000;
     background: #c4c4c4;
@@ -43,7 +44,7 @@
     justify-content: center;
     align-items: center;
 
-    li {
+    &-item {
       height: 64px;
       width: 50%;
       display: flex;
