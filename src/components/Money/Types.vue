@@ -28,7 +28,7 @@
 
     // type = '-';  // '-'表示支出 '+'表示收入
     @Prop() readonly value!: string;
-    selectType(type: string) {
+    selectTab(type: string) {
       if (type !== '-' && type !== '+') {
         throw new Error('type is unknown');
       }
@@ -43,7 +43,7 @@
   //     }
   //   },
   //   methods: {
-  //     selectType(type) {
+  //     selectTab(type) {
   //       this.type = type;
   //     }
   //   }

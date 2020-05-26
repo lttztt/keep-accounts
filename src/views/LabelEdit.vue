@@ -70,6 +70,7 @@
     justify-content: center;
     align-items: center;
     padding: 8px;
+    background: #fff;
 
     .icon {
       position: absolute;
