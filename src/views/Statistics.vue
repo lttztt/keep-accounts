@@ -2,7 +2,7 @@
   <Layout>
     <div class="statistics">
       <Tabs :data-source="recordTypeList" :value.sync="type" class-prefix="type"/>
-      <Tabs :data-source="intervalList" :value.sync="interval" class-prefix="interval"/>
+      <Tabs :data-source="intervalList" :value.sync="interval" height="48px" class-prefix="interval"/>
     </div>
   </Layout>
 </template>
@@ -18,9 +18,9 @@
         }
       }
     }
-    .interval-tabs-item {
-      height: 48px;
-    }
+    /*.interval-tabs-item {*/
+    /*  height: 48px;*/
+    /*}*/
   }
 </style>
 <script lang="ts">

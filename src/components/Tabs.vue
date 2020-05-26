@@ -4,6 +4,7 @@
       v-for="item in dataSource"
       :key="item.value"
       :class="liClass(item)"
+      :style="liStyle"
       class="tabs-item"
       @click="selectTab(item)">{{item.text}}
     </li>
@@ -21,6 +22,14 @@
     @Prop({required: true, type: Array}) dataSource!: DataSourceType[];
     @Prop(String) readonly value!: string;
     @Prop(String) classPrefix?: string;
+    @Prop({type: String, default: '64px'}) height?: string;
+
+    get liStyle(){
+      if(!this.height) return null
+      return ({
+        height: this.height
+      })
+    }
 
     liClass(tab: DataSourceType) {
       return {
