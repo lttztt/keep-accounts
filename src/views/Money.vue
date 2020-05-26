@@ -6,7 +6,7 @@
         label="备注"
         placeholder="请输入备注"
         :value.sync="record.notes" />
-      <Types :value.sync="record.type" />
+      <Tabs :data-source="tabList" :value.sync="record.type"/>
       <number-pad :value.sync="record.amount" @submit="saveRecord"/>
     </div>
   </Layout>
@@ -16,14 +16,18 @@
   import Vue from 'vue'
   import Tags from '@/components/Money/Tags.vue';
   import FormItem from '@/components/FormItem.vue';
-  import Types from '@/components/Money/Types.vue';
   import NumberPad from '@/components/Money/NumberPad.vue';
   import {Component} from "vue-property-decorator";
+  import Tabs from '@/components/Tabs.vue';
 
   @Component({
-    components: {NumberPad, Types, FormItem, Tags}
+    components: {Tabs, NumberPad, FormItem, Tags}
   })
   export default class Money extends Vue {
+    tabList = [
+      { text: '支出', value: '-' },
+      { text: '收入', value: '+' },
+    ]
     created(){
       this.$store.commit('fetchRecords');
       this.$store.commit('fetchTags')
