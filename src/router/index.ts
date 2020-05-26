@@ -6,6 +6,8 @@ import Statistics from "@/views/Statistics.vue";
 import NotFound from "@/views/NotFound.vue";
 import LabelEdit from '@/views/LabelEdit.vue';
 
+import Demo from '@/views/Demo.vue';
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -32,6 +34,11 @@ const routes = [
     path: '/label/edit/:id',
     name: 'labelEdit',
     component: LabelEdit
+  },
+  {
+    path: '/demo',
+    name: 'demo',
+    component: Demo
   },
   {
     path: '*',
