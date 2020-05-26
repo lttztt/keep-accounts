@@ -10,7 +10,7 @@ const recordStore =  {
   },
   createRecord(record: RecordItem) {
     let record2: RecordItem = clone(record);
-    record2.createAt = new Date();
+    record2.createAt = new Date().toISOString();
     this.recordList.push(record2);
     this.saveRecords();
   },
@@ -18,7 +18,6 @@ const recordStore =  {
     window.localStorage.setItem(localStorageName, JSON.stringify(this.recordList));
   }
 };
-
 recordStore.fetchRecords()
 
 export default recordStore;

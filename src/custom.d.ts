@@ -3,7 +3,7 @@ type RecordItem = {
   notes: string,
   type: string,
   amount: number, //数据类型 object | string
-  createAt?: Date // 类 | 构造函数
+  createAt?: string // 类 | 构造函数 由于需要json序列化所以Date类型不能支持
 }
 type Tag = {
   id: string
@@ -18,6 +18,11 @@ type TagListModal = {
   save: () => void
 }
 
+type RootState = {
+  recordList: RecordItem[],
+  tagList: Tag[],
+  currentTag?: Tag
+}
 
 interface Window {
   tagList: Tag[]
