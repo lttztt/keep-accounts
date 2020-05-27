@@ -2,7 +2,7 @@
   <Layout>
     <div class="statistics">
       <Tabs :data-source="recordTypeList" :value.sync="type" class-prefix="type"/>
-      <Tabs :data-source="intervalList" :value.sync="interval" height="48px" class-prefix="interval"/>
+<!--      <Tabs :data-source="intervalList" :value.sync="interval" height="48px" class-prefix="interval"/>-->
       <ol>
         <li
           v-for="(group, index) in result"
@@ -87,7 +87,7 @@
       if(recordList.length === 0) {return [];}
 
       // 赋值一个recordList并按照日期排序
-      const newList = clone(recordList).sort((a,b)=> dayjs(b.createAt).valueOf() - dayjs(a.createAt).valueOf());
+      const newList = clone(recordList).filter(item => item.type === this.type).sort((a,b)=> dayjs(b.createAt).valueOf() - dayjs(a.createAt).valueOf());
       type Result = {
         title: string,
         total?: number,
@@ -134,9 +134,9 @@
 <style scoped lang="scss">
   ::v-deep {
     .type-tabs-item {
-      background: white;
+      background:#C4C4C4;
       &.selected {
-        background: #C4C4C4;
+        background: #fff;
         &::after {
           display: none;
         }
