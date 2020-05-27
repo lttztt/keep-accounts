@@ -46,7 +46,7 @@
 <style scoped lang="scss">
   .label .tags {
     background: #fff;
-
+    margin-bottom: 10px;
     > .tag {
       font-size: 18px;
       display: flex;
@@ -66,9 +66,11 @@
   }
 
   .createTag-wrapper {
+    position: fixed;
+    width: 100%;
+    bottom: 70px;
     text-align: center;
-    padding-top: 16px;
-    margin-top: 44-16px;
+    margin: 44-16px 0;
   }
 
 </style>

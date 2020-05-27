@@ -2,7 +2,7 @@
   <div class="form-item">
     <label>
       <span class="form-label">{{label}}</span>
-      <input type="text" :value="value" @input="onValueChange" :placeholder="placeholder">
+      <input type="text" :value="value" @change="onValueChange" :placeholder="placeholder">
     </label>
   </div>
 </template>
